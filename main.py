@@ -14,13 +14,12 @@ range04 = range(48381,65536)
 
 def syn_send(param_dst_ip,param_dst_port):
     syn_package = IP(dst=param_dst_ip, id=RandShort(), ttl=99) / TCP(sport=RandShort(), dport=[param_dst_port],seq=RandShort(), ack=RandShort(),window=RandShort(), flags="S")
-    ans = sr1(syn_package, verbose=0, timeout=0.1)
+    ans = sr1(syn_package, verbose=0, timeout=0.3) ## Timeout depends by many factors (-_-)
     try:
         pktflags = ans.getlayer(TCP).flags
         if pktflags == None:
             pass
         else:
-            print(pktflags)
             if pktflags == "SA":
                 print("Port Open:", param_dst_port)
             else:
