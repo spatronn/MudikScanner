@@ -1,5 +1,3 @@
-import multiprocessing
-
 from scapy.all import *
 from datetime import datetime
 from multiprocessing import *
